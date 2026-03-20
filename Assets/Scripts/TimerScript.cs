@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class TimerScript : MonoBehaviour
 {
-    public float timeRemaining = 60f;
-    public TMP_Text timerText;
+    [SerializeField] private float timeRemaining = 60f;
+    [SerializeField] private TMP_Text timerText;
 
     // Update is called once per frame
     void Update()
@@ -17,6 +17,5 @@ public class TimerScript : MonoBehaviour
         {
             timerText.text = "Game Over";
         }
-
     }
 }
