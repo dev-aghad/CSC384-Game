@@ -4,19 +4,18 @@ using UnityEngine.InputSystem;
 public class PlayerMovementBehaviour : MonoBehaviour
 {
     [SerializeField] private float speed;
-    [SerializeField] private float jumpForce = 5f;
-    [SerializeField] private float jumpCooldown = 5f;
+    [SerializeField] private float jumpForce = 10f;
 
     private InputAction moveAction;
-    private Transform tr;
     private Vector2 axisValue;
-    private Vector2 moveDistance;
-    private float lastJumpTime;
     private Rigidbody2D rb;
+    private Vector2 newVelocity;
+    private float xVelocity;
+    private float yVelocity;
+    private bool isGrounded;
 
     private void Awake()
     {
-        tr = transform;
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -28,24 +27,46 @@ public class PlayerMovementBehaviour : MonoBehaviour
 
     private void Update()
     {
+        newVelocity = rb.linearVelocity;
+
         if (moveAction != null) 
         {
             axisValue = moveAction.ReadValue<Vector2>();
+            newVelocity = rb.linearVelocity;
 
             // Horizontal movement
-            moveDistance = new Vector2(axisValue.x, 0) * speed * Time.deltaTime;
-            tr.Translate(moveDistance);
+            xVelocity = axisValue.x * speed;
+            newVelocity.x = xVelocity;
+  
 
             // Vertical movement
-            if (axisValue.y > 0.1f && Time.time >= lastJumpTime + jumpCooldown)
+            if (axisValue.y > 0.1f && isGrounded)
             {
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-                lastJumpTime = Time.time;
+                yVelocity = jumpForce;
+                newVelocity.y = yVelocity;
             }
+
+            rb.linearVelocity = newVelocity;
         }
     }
     public Vector2 GetMovementInput()
     {
         return axisValue;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Platform"))
+        {
+            isGrounded = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Platform"))
+        {
+            isGrounded = false;
+        }
     }
 }

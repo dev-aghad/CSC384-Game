@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 9059864}
   - component: {fileID: 9059863}
   - component: {fileID: 9059862}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IndustrialTile_31_0 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -285,6 +285,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &84079368
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 84079369}
+  m_Layer: 3
+  m_Name: PlatformCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &84079369
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84079368}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 219273683}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &219273679
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,7 +331,7 @@ GameObject:
   - component: {fileID: 219273688}
   - component: {fileID: 219273686}
   - component: {fileID: 219273687}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,7 +409,8 @@ Transform:
   m_LocalPosition: {x: -1.01, y: 0.03608439, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 84079369}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &219273684
@@ -443,7 +475,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: e53a1cc2c6eebaa43b9a64922d82a7d7, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -468,7 +500,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementBehaviour
   speed: 4
   jumpForce: 5
-  jumpCooldown: 1
 --- !u!114 &219273687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -736,7 +767,7 @@ GameObject:
   - component: {fileID: 650260872}
   - component: {fileID: 650260871}
   - component: {fileID: 650260870}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IndustrialTile_31_0 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -902,7 +933,7 @@ GameObject:
   - component: {fileID: 969318024}
   - component: {fileID: 969318023}
   - component: {fileID: 969318022}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IndustrialTile_31_0 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1295,7 +1326,7 @@ GameObject:
   - component: {fileID: 1764241281}
   - component: {fileID: 1764241280}
   - component: {fileID: 1764241279}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IndustrialTile_31_0 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1461,7 +1492,7 @@ GameObject:
   - component: {fileID: 1873968790}
   - component: {fileID: 1873968793}
   - component: {fileID: 1873968792}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IndustrialTile_31_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1627,7 +1658,7 @@ GameObject:
   - component: {fileID: 1938555485}
   - component: {fileID: 1938555484}
   - component: {fileID: 1938555483}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IndustrialTile_31_0 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1959,7 +1990,7 @@ GameObject:
   - component: {fileID: 1962531131}
   - component: {fileID: 1962531130}
   - component: {fileID: 1962531129}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IndustrialTile_31_0 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
