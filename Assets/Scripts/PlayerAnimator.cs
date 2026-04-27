@@ -35,7 +35,7 @@ public class PlayerAnimator : MonoBehaviour
         }
 
         // Jumping
-        if (Mathf.Abs(rb.linearVelocity.y) > 0.1f)
+        if (!movement.IsGrounded())
         {
             animator.SetBool("isJumping", true);
         }
