@@ -24,7 +24,6 @@ public class PlayerAnimator : MonoBehaviour
     {
         Vector2 input = movement.GetMovementInput();
 
-        // Only trigger when moving right (walking)
         if (Mathf.Abs(input.x) > 0.1f)
         {
             animator.SetBool("isWalking", true);
@@ -34,7 +33,6 @@ public class PlayerAnimator : MonoBehaviour
             animator.SetBool("isWalking", false);
         }
 
-        // Jumping
         if (!movement.IsGrounded())
         {
             animator.SetBool("isJumping", true);
@@ -44,7 +42,6 @@ public class PlayerAnimator : MonoBehaviour
             animator.SetBool("isJumping", false);
         }
 
-        // If going left (flip sprite)
         if (input.x < -0.1f)
         {
             spriteRenderer.flipX = true;
