@@ -6,7 +6,6 @@ public class TimerScript : MonoBehaviour
     [SerializeField] private float timeRemaining = 60f;
     [SerializeField] private TMP_Text timerText;
 
-    // Update is called once per frame
     void Update()
     {
         timeRemaining -= Time.deltaTime;

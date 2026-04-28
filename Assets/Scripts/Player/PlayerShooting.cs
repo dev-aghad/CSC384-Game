@@ -14,6 +14,7 @@ public class PlayerShooting : MonoBehaviour
     private Vector2 originalFirePointPosition;
     private Vector2 originalShootEffectPosition;
 
+    private Quaternion bulletRotation;
     private float lastFireTime;
     private PlayerAnimator playerAnimator;
     private InputAction shootAction;
@@ -70,8 +71,6 @@ public class PlayerShooting : MonoBehaviour
 
     private void Shoot()
     {
-        Quaternion bulletRotation;
-
         if (playerAnimator.IsFacingRight())
         {
             bulletRotation = Quaternion.identity;
