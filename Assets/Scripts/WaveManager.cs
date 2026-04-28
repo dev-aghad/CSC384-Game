@@ -11,6 +11,8 @@ public class WaveManager : MonoBehaviour
     private int currentWave = 1;
     private int enemiesAlive;
 
+    private Transform selectedSpawnPoint;
+
 
     private void Start()
     {
@@ -50,11 +52,39 @@ public class WaveManager : MonoBehaviour
 
     private void SpawnEnemy(GameObject enemyPrefab)
     {
+        /*
         int randomIndex = Random.Range(0, spawnPoints.Length);
 
         Instantiate(
             enemyPrefab,
             spawnPoints[randomIndex].position,
+            Quaternion.identity
+        );
+
+        enemiesAlive++;
+        */
+
+        selectedSpawnPoint = null;
+
+        while (selectedSpawnPoint == null)
+        {
+            int randomIndex = Random.Range(0, spawnPoints.Length);
+            Transform potentialSpawn = spawnPoints[randomIndex];
+
+            float distanceToPlayer = Vector2.Distance(
+                potentialSpawn.position,
+                GameObject.FindGameObjectWithTag("Player").transform.position
+            );
+
+            if (distanceToPlayer > 3f)
+            {
+                selectedSpawnPoint = potentialSpawn;
+            }
+        }
+
+        Instantiate(
+            enemyPrefab,
+            selectedSpawnPoint.position,
             Quaternion.identity
         );
 
