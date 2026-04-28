@@ -22,12 +22,6 @@ public class BulletBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(
-        "Bullet hit: " + collision.gameObject.name +
-        " | Layer: " + collision.gameObject.layer +
-        " | Layer Name: " + LayerMask.LayerToName(collision.gameObject.layer)
-    );
-
         if (collision.gameObject.layer == LayerMask.NameToLayer("Platform"))
         {
             Destroy(gameObject);

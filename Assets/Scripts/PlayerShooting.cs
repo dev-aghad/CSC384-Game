@@ -19,10 +19,13 @@ public class PlayerShooting : MonoBehaviour
     private InputAction shootAction;
     private SpriteRenderer shootEffectSprite;
 
-    void Start()
+    private void Awake()
     {
         playerAnimator = GetComponent<PlayerAnimator>();
         shootEffectSprite = shootEffectObject.GetComponent<SpriteRenderer>();
+    }
+    private void Start()
+    {
         shootAction = InputSystem.actions.FindAction("Attack");
 
         originalFirePointPosition = firePoint.transform.localPosition;
@@ -31,7 +34,7 @@ public class PlayerShooting : MonoBehaviour
         shootEffectObject.SetActive(false);
     }
 
-    void Update()
+    private void Update()
     {
         if (playerAnimator.IsFacingRight())
         {

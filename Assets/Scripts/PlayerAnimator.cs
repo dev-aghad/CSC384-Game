@@ -12,7 +12,7 @@ public class PlayerAnimator : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
 
-    private void Start()
+    private void Awake()
     {
         animator = GetComponent<Animator>();
         movement = GetComponent<PlayerMovementBehaviour>();
