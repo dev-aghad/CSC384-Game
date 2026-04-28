@@ -68,13 +68,16 @@ public class EnemyBehaviour : MonoBehaviour
     */
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (playerHealth != null)
+        if (collision.gameObject.CompareTag("Player"))
         {
-            playerHealth.TakeDamage(50);
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(50);
 
-            currentState.Exit(this);
-            currentState = new EnemyAttackState();
-            currentState.Enter(this);
+                currentState.Exit(this);
+                currentState = new EnemyAttackState();
+                currentState.Enter(this);
+            }
         }
     }
 
