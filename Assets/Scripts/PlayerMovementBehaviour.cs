@@ -19,7 +19,7 @@ public class PlayerMovementBehaviour : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Not in Awake since we want to make sure external peripherals and controllers are initialised before starting 
+
     private void Start()
     {
         moveAction = InputSystem.actions.FindAction("Move");

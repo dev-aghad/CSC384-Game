@@ -54,4 +54,9 @@ public class PlayerAnimator : MonoBehaviour
             spriteRenderer.flipX = false;
         }
     }
+
+    public bool IsFacingRight()
+    {
+        return !spriteRenderer.flipX;
+    }
 }
