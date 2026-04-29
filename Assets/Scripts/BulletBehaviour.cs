@@ -9,6 +9,8 @@ public class BulletBehaviour : MonoBehaviour
     [SerializeField] private float lifetime = 3f;
     [SerializeField] private float speed;
 
+    private int damage;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -34,10 +36,15 @@ public class BulletBehaviour : MonoBehaviour
 
         if (enemyHealth != null)
         {
-            enemyHealth.TakeDamage(1);
+            enemyHealth.TakeDamage(damage);
             // Hopefully garbage collection shouldn't lag the game
             // (Remember to change to setActive(false) when testing)
             Destroy(gameObject);
         }
+    }
+
+    public void SetDamage(int bulletDamage)
+    {
+        damage = bulletDamage;
     }
 }

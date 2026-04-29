@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -6,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float damageCooldown = 1f;
     private int currentHealth;
     private float lastDamageTime;
+    private bool isInvulnerable = false;
 
     private void Start()
     {
@@ -14,7 +16,9 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (Time.time >= lastDamageTime + damageCooldown)
+        Debug.Log("isInvulnerable: " + isInvulnerable);
+
+        if (Time.time >= lastDamageTime + damageCooldown && !isInvulnerable)
         {
             currentHealth -= damage;
             lastDamageTime = Time.time;
@@ -29,5 +33,20 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         Destroy(gameObject);
+    }
+
+    public void ActivateShield()
+    {
+        Debug.Log("Shield Activated");
+        StartCoroutine(ShieldRoutine());
+    }
+
+    private IEnumerator ShieldRoutine()
+    {
+        isInvulnerable = true;
+
+        yield return new WaitForSeconds(5f);
+
+        isInvulnerable = false;
     }
 }

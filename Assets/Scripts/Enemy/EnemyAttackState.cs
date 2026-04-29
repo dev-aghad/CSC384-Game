@@ -6,7 +6,7 @@ public class EnemyAttackState : IEnemyState
 
     public void Enter(EnemyBehaviour enemy)
     {
-        Debug.Log("Enemy attacking");
+        //Debug.Log("Enemy attacking");
     }
 
     public IEnemyState Tick(EnemyBehaviour enemy)

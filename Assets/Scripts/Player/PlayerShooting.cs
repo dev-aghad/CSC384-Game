@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,6 +20,7 @@ public class PlayerShooting : MonoBehaviour
     private PlayerAnimator playerAnimator;
     private InputAction shootAction;
     private SpriteRenderer shootEffectSprite;
+    private int damage = 1;
 
     private void Awake()
     {
@@ -80,11 +82,13 @@ public class PlayerShooting : MonoBehaviour
             bulletRotation = Quaternion.Euler(0, 0, 180);
         }
 
-        Instantiate(
+        GameObject bullet = Instantiate(
             bulletPrefab,
             firePoint.transform.position,
             bulletRotation
         );
+
+        bullet.GetComponent<BulletBehaviour>().SetDamage(damage);
 
         shootEffectObject.SetActive(true);
         shootEffectAnimator.Play("ShootingEffect");
@@ -95,5 +99,25 @@ public class PlayerShooting : MonoBehaviour
     private void HideShootEffect()
     {
         shootEffectObject.SetActive(false);
+    }
+
+    public void ActivateDoubleDamage()
+    {
+        Debug.Log("Double Damage Activated");
+        StartCoroutine(DoubleDamageRoutine());
+    }
+
+    private IEnumerator DoubleDamageRoutine()
+    {
+        damage = 2;
+
+        yield return new WaitForSeconds(5f);
+
+        damage = 1;
+    }
+
+    public int GetDamage()
+    {
+        return damage;
     }
 }
