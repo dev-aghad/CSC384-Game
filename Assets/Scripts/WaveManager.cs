@@ -11,6 +11,9 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] private TMP_Text waveText;
 
+    [SerializeField] private AudioSource waveAudio;
+    [SerializeField] private AudioClip waveStartClip;
+
     private int currentWave = 1;
     private int enemiesAlive;
 
@@ -37,6 +40,11 @@ public class WaveManager : MonoBehaviour
         FindFirstObjectByType<UIManager>().ShowWaveText("Wave " + currentWave);
 
         enemiesAlive = 0;
+
+        if (waveAudio != null && waveStartClip != null && currentWave != 1)
+        {
+            waveAudio.PlayOneShot(waveStartClip);
+        }
 
         if (currentWave == 1)
         {
