@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem.Processors;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private AudioClip hitClip;
 
     [SerializeField] private bool isFastEnemy;
+    private bool isDead = false;
 
     private Color originalColour;
 
@@ -54,6 +56,9 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
+        if (isDead) return;
+        isDead = true;
+
         if (waveManager != null)
         {
             if (isFastEnemy)

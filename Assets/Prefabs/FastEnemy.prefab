@@ -198,6 +198,7 @@ MonoBehaviour:
   maxHealth: 1
   hitAudio: {fileID: -8177127671243285000}
   hitClip: {fileID: 8300000, guid: eb5ce7ace3bd4be4aad9b056421378fb, type: 3}
+  isFastEnemy: 1
 --- !u!114 &8980637607560810521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,6 +221,7 @@ MonoBehaviour:
   shieldDeactivateClip: {fileID: 0}
   takeDamageAudio: {fileID: 0}
   takeDamageClip: {fileID: 0}
+  deathClip: {fileID: 0}
 --- !u!82 &-8177127671243285000
 AudioSource:
   m_ObjectHideFlags: 0

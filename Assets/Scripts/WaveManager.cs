@@ -42,7 +42,6 @@ public class WaveManager : MonoBehaviour
     private void StartWave()
     {
         FindFirstObjectByType<UIManager>().UpdateWave(currentWave);
-        FindFirstObjectByType<UIManager>().ShowWaveText("Wave " + currentWave);
 
         enemiesAlive = 0;
 
@@ -51,20 +50,26 @@ public class WaveManager : MonoBehaviour
             waveAudio.PlayOneShot(waveStartClip);
         }
 
+        string nextWaveInfo = "";
+
         if (currentWave == 1)
         {
             SpawnBasicEnemies(1);
-            SpawnFastEnemies(1);
+            nextWaveInfo = "Next: 3 Basic";
         }
         else if (currentWave == 2)
         {
-            SpawnBasicEnemies(5);
+            SpawnBasicEnemies(3);
+            nextWaveInfo = "Next: 3 Basic, 2 Fast";
         } 
         else 
         {
-            SpawnBasicEnemies(5);
+            SpawnBasicEnemies(3);
             SpawnFastEnemies(2);
         }
+
+        string waveDisplay = "Wave " + currentWave + "\n" + nextWaveInfo;
+        FindFirstObjectByType<UIManager>().ShowWaveText(waveDisplay);
 
         UpdateUI();
     }
