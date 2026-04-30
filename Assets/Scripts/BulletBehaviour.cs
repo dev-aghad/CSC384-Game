@@ -9,11 +9,14 @@ public class BulletBehaviour : MonoBehaviour
     [SerializeField] private float lifetime = 3f;
     [SerializeField] private float speed;
 
+    private SpriteRenderer spriteRenderer;
+
     private int damage;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
@@ -46,5 +49,13 @@ public class BulletBehaviour : MonoBehaviour
     public void SetDamage(int bulletDamage)
     {
         damage = bulletDamage;
+    }
+
+    public void SetColor(Color color)
+    {
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = color;
+        }
     }
 }

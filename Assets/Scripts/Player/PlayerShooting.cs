@@ -102,7 +102,20 @@ public class PlayerShooting : MonoBehaviour
 
         shootAudio.Play();
 
-        bullet.GetComponent<BulletBehaviour>().SetDamage(damage);
+        BulletBehaviour bulletBehaviour = bullet.GetComponent<BulletBehaviour>();
+
+        bulletBehaviour.SetDamage(damage);
+
+        if (damage > 1)
+        {
+            bulletBehaviour.SetColor(new Color(1f, 0.4f, 0f));
+            shootEffectSprite.color = new Color(1f, 0.4f, 0f);
+        } 
+        else
+        {
+            bulletBehaviour.SetColor(Color.white);
+            shootEffectSprite.color = Color.white;
+        }
 
         shootEffectObject.SetActive(true);
         shootEffectAnimator.Play("ShootingEffect");
