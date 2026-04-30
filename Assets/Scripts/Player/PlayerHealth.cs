@@ -26,6 +26,8 @@ public class PlayerHealth : MonoBehaviour
     private float lastDamageTime;
     private bool isInvulnerable = false;
 
+    private Coroutine shieldCoroutine;
+
     private void Start()
     {
         playerSprite = GetComponent<SpriteRenderer>();
@@ -69,12 +71,17 @@ public class PlayerHealth : MonoBehaviour
 
     public void ActivateShield()
     {
+        if (shieldCoroutine != null)
+        {
+            StopCoroutine(shieldCoroutine);
+        }
+
         if (shieldAudio != null && shieldActivateClip != null)
         {
             shieldAudio.PlayOneShot(shieldActivateClip);
         }
 
-        StartCoroutine(ShieldRoutine());
+        shieldCoroutine = StartCoroutine(ShieldRoutine());
     }
 
     private IEnumerator ShieldRoutine()
@@ -106,6 +113,8 @@ public class PlayerHealth : MonoBehaviour
 
         shieldUI.SetActive(false);
         isInvulnerable = false;
+
+        shieldCoroutine = null;
     }
 
     private void UpdateHearts()

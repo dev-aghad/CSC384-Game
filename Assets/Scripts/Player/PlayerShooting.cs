@@ -32,6 +32,8 @@ public class PlayerShooting : MonoBehaviour
     private SpriteRenderer shootEffectSprite;
     private int damage = 1;
 
+    private Coroutine damageCoroutine;
+
     private void Awake()
     {
         playerAnimator = GetComponent<PlayerAnimator>();
@@ -133,12 +135,17 @@ public class PlayerShooting : MonoBehaviour
 
     public void ActivateDoubleDamage()
     {
+        if (damageCoroutine != null)
+        {
+            StopCoroutine(damageCoroutine);
+        }
+
         if (damageAudio != null && damageActivateClip != null)
         {
             damageAudio.PlayOneShot(damageActivateClip);
         }
 
-        StartCoroutine(DoubleDamageRoutine());
+        damageCoroutine = StartCoroutine(DoubleDamageRoutine());
     }
 
     private IEnumerator DoubleDamageRoutine()
@@ -165,6 +172,8 @@ public class PlayerShooting : MonoBehaviour
         {
             damageAudio.PlayOneShot(damageDeactivateClip);
         }
+
+        damageCoroutine = null;
     }
 
     public int GetDamage()
