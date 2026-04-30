@@ -108,8 +108,8 @@ public class PlayerShooting : MonoBehaviour
 
         if (damage > 1)
         {
-            bulletBehaviour.SetColor(new Color(1f, 0.4f, 0f));
-            shootEffectSprite.color = new Color(1f, 0.4f, 0f);
+            bulletBehaviour.SetColor(new Color(255f, 0f, 0f));
+            shootEffectSprite.color = new Color(255f, 0f, 0f);
         } 
         else
         {
