@@ -14,8 +14,13 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private AudioSource shieldAudio;
     [SerializeField] private AudioClip shieldActivateClip;
     [SerializeField] private AudioClip shieldDeactivateClip;
+    [SerializeField] private AudioSource takeDamageAudio;
+    [SerializeField] private AudioClip takeDamageClip;
+    [SerializeField] private AudioClip deathClip;
 
     private SpriteRenderer playerSprite;
+    private float flashDuration = 0.2f;
+    private Color originalColour;
 
     private int currentHealth;
     private float lastDamageTime;
@@ -24,6 +29,7 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         playerSprite = GetComponent<SpriteRenderer>();
+        originalColour = playerSprite.color;
         currentHealth = maxHealth;
         UpdateHearts();
 
@@ -37,7 +43,13 @@ public class PlayerHealth : MonoBehaviour
     {
         if (Time.time >= lastDamageTime + damageCooldown && !isInvulnerable)
         {
+            if (takeDamageAudio != null && takeDamageClip != null)
+            {
+                takeDamageAudio.PlayOneShot(takeDamageClip);
+            }
+
             currentHealth -= damage;
+            StartCoroutine(DamageFlash());
             lastDamageTime = Time.time;
             UpdateHearts();
 
@@ -50,6 +62,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
+        AudioSource.PlayClipAtPoint(deathClip, transform.position);
         Destroy(gameObject);
         FindFirstObjectByType<FadeController>().FadeToScene("MainMenuScene");
     }
@@ -108,5 +121,19 @@ public class PlayerHealth : MonoBehaviour
                 hearts[i].SetActive(false);
             }
         }
+    }
+
+    private IEnumerator DamageFlash()
+    {
+        if (isInvulnerable)
+        {
+            yield break;
+        }
+
+        playerSprite.color = Color.red;
+
+        yield return new WaitForSeconds(flashDuration);
+
+        playerSprite.color = originalColour;
     }
 }
