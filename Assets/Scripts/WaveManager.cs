@@ -1,3 +1,4 @@
+using System.Threading;
 using TMPro;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -10,12 +11,16 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private Transform[] spawnPoints;
 
     [SerializeField] private TMP_Text waveText;
+    [SerializeField] private TMP_Text basicEnemyText;
+    [SerializeField] private TMP_Text fastEnemyText;
 
     [SerializeField] private AudioSource waveAudio;
     [SerializeField] private AudioClip waveStartClip;
 
     private int currentWave = 1;
     private int enemiesAlive;
+    private int basicEnemiesAlive;
+    private int fastEnemiesAlive;
 
     private Transform selectedSpawnPoint;
 
@@ -60,6 +65,8 @@ public class WaveManager : MonoBehaviour
             SpawnBasicEnemies(5);
             SpawnFastEnemies(2);
         }
+
+        UpdateUI();
     }
 
     private void SpawnEnemy(GameObject enemyPrefab)
@@ -105,6 +112,8 @@ public class WaveManager : MonoBehaviour
 
     private void SpawnBasicEnemies(int amount)
     {
+        basicEnemiesAlive = amount;
+
         for (int i = 0; i < amount; i++)
         {
             SpawnEnemy(basicEnemyPrefab);
@@ -113,6 +122,8 @@ public class WaveManager : MonoBehaviour
 
     private void SpawnFastEnemies(int amount)
     {
+        fastEnemiesAlive = amount;
+
         for (int i = 0; i < amount; i++)
         {
             SpawnEnemy(fastEnemyPrefab);
@@ -122,5 +133,30 @@ public class WaveManager : MonoBehaviour
     public void EnemyDied()
     {
         enemiesAlive--;
+    }
+
+    public void BasicEnemyDied()
+    {
+        basicEnemiesAlive--;
+        UpdateUI();
+    }
+
+    public void FastEnemyDied()
+    {
+        fastEnemiesAlive--;
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        if (basicEnemyText != null)
+        {
+            basicEnemyText.text = basicEnemiesAlive.ToString();
+        }
+
+        if (fastEnemyText != null)
+        {
+            fastEnemyText.text = fastEnemiesAlive.ToString();
+        }
     }
 }

@@ -14,6 +14,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private AudioSource hitAudio;
     [SerializeField] private AudioClip hitClip;
 
+    [SerializeField] private bool isFastEnemy;
+
     private Color originalColour;
 
     private void Start()
@@ -52,6 +54,18 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
+        if (waveManager != null)
+        {
+            if (isFastEnemy)
+            {
+                waveManager.FastEnemyDied();
+            } 
+            else
+            {
+                waveManager.BasicEnemyDied();
+            }
+        }
+
         waveManager.EnemyDied();
         Destroy(gameObject);
     }
