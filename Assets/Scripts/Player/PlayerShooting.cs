@@ -16,6 +16,9 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] private float fireCooldown = 0.5f;
     [SerializeField] private Animator shootEffectAnimator;
     [SerializeField] private GameObject shootEffectObject;
+
+    [SerializeField] private AudioSource shootAudio;
+
     private Vector2 originalFirePointPosition;
     private Vector2 originalShootEffectPosition;
 
@@ -96,6 +99,8 @@ public class PlayerShooting : MonoBehaviour
             firePoint.transform.position,
             bulletRotation
         );
+
+        shootAudio.Play();
 
         bullet.GetComponent<BulletBehaviour>().SetDamage(damage);
 

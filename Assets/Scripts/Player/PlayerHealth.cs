@@ -1,6 +1,7 @@
 using TMPro;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -44,6 +45,7 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         Destroy(gameObject);
+        FindFirstObjectByType<FadeController>().FadeToScene("MainMenuScene");
     }
 
     public void ActivateShield()
