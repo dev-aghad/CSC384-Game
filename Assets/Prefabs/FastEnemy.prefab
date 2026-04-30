@@ -82,9 +82,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 802046071
+  m_SortingLayer: 5
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -3781910019033479378, guid: 851ec7a393e9483448e048cea0759927, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -209,3 +209,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 100
   damageCooldown: 1
+  hearts: []
+  shieldUI: {fileID: 0}
+  shieldTimerText: {fileID: 0}
