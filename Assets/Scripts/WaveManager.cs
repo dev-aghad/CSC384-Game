@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private GameObject fastEnemyPrefab;
 
     [SerializeField] private Transform[] spawnPoints;
+
+    [SerializeField] private TMP_Text waveText;
 
     private int currentWave = 1;
     private int enemiesAlive;
@@ -30,7 +33,7 @@ public class WaveManager : MonoBehaviour
 
     private void StartWave()
     {
-        Debug.Log("Wave " + currentWave);
+        waveText.text = "Wave " + currentWave;
 
         enemiesAlive = 0;
 

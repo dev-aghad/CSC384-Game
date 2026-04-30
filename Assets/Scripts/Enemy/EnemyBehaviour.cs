@@ -72,7 +72,7 @@ public class EnemyBehaviour : MonoBehaviour
         {
             if (playerHealth != null)
             {
-                playerHealth.TakeDamage(50);
+                playerHealth.TakeDamage(1);
 
                 currentState.Exit(this);
                 currentState = new EnemyAttackState();
