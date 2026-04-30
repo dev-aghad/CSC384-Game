@@ -13,10 +13,12 @@ public class PowerUpPickup : MonoBehaviour
             if (isShieldPowerUp)
             {
                 command = new ShieldCommand(collision.gameObject);
+                FindFirstObjectByType<UIManager>().ShowPowerUpText("Shield Activated!");
             }
             else
             {
                 command = new DoubleDamageCommand(collision.gameObject);
+                FindFirstObjectByType<UIManager>().ShowPowerUpText("Double Damage Activated!");
             }
 
             command.Execute();

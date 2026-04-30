@@ -1,3 +1,4 @@
+using TMPro;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,6 +8,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerShooting : MonoBehaviour
 {
+    [SerializeField] private GameObject damageUI;
+    [SerializeField] private TMP_Text damageTimerText;
+    
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private GameObject firePoint;
     [SerializeField] private float fireCooldown = 0.5f;
@@ -35,6 +39,11 @@ public class PlayerShooting : MonoBehaviour
         originalShootEffectPosition = shootEffectObject.transform.localPosition;
 
         shootEffectObject.SetActive(false);
+
+        if (damageUI != null)
+        {
+            damageUI.SetActive(false);
+        }
     }
 
     private void Update()
@@ -111,8 +120,18 @@ public class PlayerShooting : MonoBehaviour
     {
         damage = 2;
 
-        yield return new WaitForSeconds(5f);
+        damageUI.SetActive(true);
 
+        float duration = 5f;
+
+        while (duration > 0)
+        {
+            damageTimerText.text = Mathf.Ceil(duration).ToString();
+            duration -= Time.deltaTime;
+            yield return null;
+        }
+
+        damageUI.SetActive(false);
         damage = 1;
     }
 

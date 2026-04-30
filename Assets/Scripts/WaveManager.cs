@@ -33,7 +33,8 @@ public class WaveManager : MonoBehaviour
 
     private void StartWave()
     {
-        waveText.text = "Wave " + currentWave;
+        FindFirstObjectByType<UIManager>().UpdateWave(currentWave);
+        FindFirstObjectByType<UIManager>().ShowWaveText("Wave " + currentWave);
 
         enemiesAlive = 0;
 

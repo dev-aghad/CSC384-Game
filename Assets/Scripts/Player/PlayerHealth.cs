@@ -1,3 +1,4 @@
+using TMPro;
 using System.Collections;
 using UnityEngine;
 
@@ -5,7 +6,10 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 3;
     [SerializeField] private float damageCooldown = 1f;
+
     [SerializeField] private GameObject[] hearts;
+    [SerializeField] private GameObject shieldUI;
+    [SerializeField] private TMP_Text shieldTimerText;
 
     private int currentHealth;
     private float lastDamageTime;
@@ -15,12 +19,15 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         UpdateHearts();
+
+        if (shieldUI != null)
+        {
+            shieldUI.SetActive(false);
+        }
     }
 
     public void TakeDamage(int damage)
     {
-        Debug.Log("Current Health: " + currentHealth);
-
         if (Time.time >= lastDamageTime + damageCooldown && !isInvulnerable)
         {
             currentHealth -= damage;
@@ -49,8 +56,18 @@ public class PlayerHealth : MonoBehaviour
     {
         isInvulnerable = true;
 
-        yield return new WaitForSeconds(5f);
+        shieldUI.SetActive(true);
 
+        float duration = 5f;
+
+        while (duration > 0)
+        {
+            shieldTimerText.text = Mathf.Ceil(duration).ToString();
+            duration -= Time.deltaTime;
+            yield return null;
+        }
+
+        shieldUI.SetActive(false);
         isInvulnerable = false;
     }
 
