@@ -11,6 +11,11 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private GameObject[] hearts;
     [SerializeField] private GameObject shieldUI;
     [SerializeField] private TMP_Text shieldTimerText;
+    [SerializeField] private AudioSource shieldAudio;
+    [SerializeField] private AudioClip shieldActivateClip;
+    [SerializeField] private AudioClip shieldDeactivateClip;
+
+    private SpriteRenderer playerSprite;
 
     private int currentHealth;
     private float lastDamageTime;
@@ -18,6 +23,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
+        playerSprite = GetComponent<SpriteRenderer>();
         currentHealth = maxHealth;
         UpdateHearts();
 
@@ -50,7 +56,11 @@ public class PlayerHealth : MonoBehaviour
 
     public void ActivateShield()
     {
-        Debug.Log("Shield Activated");
+        if (shieldAudio != null && shieldActivateClip != null)
+        {
+            shieldAudio.PlayOneShot(shieldActivateClip);
+        }
+
         StartCoroutine(ShieldRoutine());
     }
 
@@ -61,12 +71,24 @@ public class PlayerHealth : MonoBehaviour
         shieldUI.SetActive(true);
 
         float duration = 5f;
+        float flashSpeed = 0.1f;
 
         while (duration > 0)
         {
+            playerSprite.color = Color.blue;
+            yield return new WaitForSeconds(flashSpeed);
+            playerSprite.color = Color.white;
+            yield return new WaitForSeconds(flashSpeed);
+            duration -= flashSpeed * 2;
+
             shieldTimerText.text = Mathf.Ceil(duration).ToString();
             duration -= Time.deltaTime;
             yield return null;
+        }
+
+        if (shieldAudio != null && shieldDeactivateClip != null)
+        {
+            shieldAudio.PlayOneShot(shieldDeactivateClip);
         }
 
         shieldUI.SetActive(false);
