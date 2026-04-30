@@ -151,12 +151,14 @@ public class PlayerShooting : MonoBehaviour
 
         while (duration > 0)
         {
+            shootAudio.pitch = 1.2f;
             damageTimerText.text = Mathf.Ceil(duration).ToString();
             duration -= Time.deltaTime;
             yield return null;
         }
 
         damageUI.SetActive(false);
+        shootAudio.pitch = 1f;
         damage = 1;
 
         if (damageAudio != null && damageDeactivateClip != null)
