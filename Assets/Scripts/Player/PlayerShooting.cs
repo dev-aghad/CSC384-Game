@@ -18,6 +18,9 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] private GameObject shootEffectObject;
 
     [SerializeField] private AudioSource shootAudio;
+    [SerializeField] private AudioSource damageAudio;
+    [SerializeField] private AudioClip damageActivateClip;
+    [SerializeField] private AudioClip damageDeactivateClip;
 
     private Vector2 originalFirePointPosition;
     private Vector2 originalShootEffectPosition;
@@ -130,7 +133,11 @@ public class PlayerShooting : MonoBehaviour
 
     public void ActivateDoubleDamage()
     {
-        Debug.Log("Double Damage Activated");
+        if (damageAudio != null && damageActivateClip != null)
+        {
+            damageAudio.PlayOneShot(damageActivateClip);
+        }
+
         StartCoroutine(DoubleDamageRoutine());
     }
 
@@ -151,6 +158,11 @@ public class PlayerShooting : MonoBehaviour
 
         damageUI.SetActive(false);
         damage = 1;
+
+        if (damageAudio != null && damageDeactivateClip != null)
+        {
+            damageAudio.PlayOneShot(damageDeactivateClip);
+        }
     }
 
     public int GetDamage()
