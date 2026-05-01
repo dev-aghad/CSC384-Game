@@ -23,6 +23,7 @@ public class WaveManager : MonoBehaviour
     private int fastEnemiesAlive;
 
     private Transform selectedSpawnPoint;
+    private int lastSpawnIndex = -1;
 
 
     private void Start()
@@ -66,6 +67,7 @@ public class WaveManager : MonoBehaviour
         {
             SpawnBasicEnemies(3);
             SpawnFastEnemies(2);
+            nextWaveInfo = "Next: 3 Basic, 2 Fast";
         }
 
         string waveDisplay = "Wave " + currentWave + "\n" + nextWaveInfo;
@@ -92,7 +94,16 @@ public class WaveManager : MonoBehaviour
 
         while (selectedSpawnPoint == null)
         {
-            int randomIndex = Random.Range(0, spawnPoints.Length);
+            int randomIndex;
+
+            do
+            {
+                randomIndex = Random.Range(0, spawnPoints.Length);
+            }
+            while (randomIndex == lastSpawnIndex && spawnPoints.Length > 1);
+
+            lastSpawnIndex = randomIndex;
+
             Transform potentialSpawn = spawnPoints[randomIndex];
 
             float distanceToPlayer = Vector2.Distance(
@@ -106,9 +117,12 @@ public class WaveManager : MonoBehaviour
             }
         }
 
+        Vector2 offset = Random.insideUnitCircle * 0.3f;
+
+        // Had to convert Vector2 to Vector3 to use with Instantiate
         Instantiate(
             enemyPrefab,
-            selectedSpawnPoint.position,
+            selectedSpawnPoint.position + (Vector3)offset,
             Quaternion.identity
         );
 
