@@ -27,7 +27,8 @@ public class BulletBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Platform"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Platform") 
+            || collision.gameObject.layer == LayerMask.NameToLayer("BorderWall"))
         {
             Destroy(gameObject);
         }

@@ -62,11 +62,28 @@ public class PlayerMovementBehaviour : MonoBehaviour
         {
             isGrounded = true;
         }
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("BorderWall"))
+        {
+            foreach (ContactPoint2D contact in collision.contacts)
+            {
+                if (contact.normal.y > 0.5f)
+                {
+                    isGrounded = true;
+                    break;
+                }
+            }
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Platform"))
+        {
+            isGrounded = false;
+        }
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("BorderWall"))
         {
             isGrounded = false;
         }
