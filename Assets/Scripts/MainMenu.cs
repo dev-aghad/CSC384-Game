@@ -21,13 +21,11 @@ public class MainMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        // Debug.Log("Quit button pressed");
         Application.Quit();
     }
 
     public void SetVolume(float volume)
     {
-        // Debug.Log("Volume set to: " + volume);
         AudioListener.volume = volume;
         PlayerPrefs.SetFloat("Volume", volume);
     }

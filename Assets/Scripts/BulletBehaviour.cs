@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent (typeof(Rigidbody2D))]
+[RequireComponent(typeof(SpriteRenderer))]
 
 public class BulletBehaviour : MonoBehaviour
 {

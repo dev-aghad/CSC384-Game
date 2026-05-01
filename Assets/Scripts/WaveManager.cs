@@ -117,12 +117,10 @@ public class WaveManager : MonoBehaviour
             }
         }
 
-        Vector2 offset = Random.insideUnitCircle * 0.3f;
-
         // Had to convert Vector2 to Vector3 to use with Instantiate
         Instantiate(
             enemyPrefab,
-            selectedSpawnPoint.position + (Vector3)offset,
+            selectedSpawnPoint.position,
             Quaternion.identity
         );
 
