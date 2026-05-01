@@ -7,6 +7,9 @@ public class PlayerMovementBehaviour : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce = 10f;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundCheckRadius = 0.2f;
+    [SerializeField] private LayerMask groundLayer;
 
     private InputAction moveAction;
     private Vector2 axisValue;
@@ -15,6 +18,7 @@ public class PlayerMovementBehaviour : MonoBehaviour
     private float xVelocity;
     private float yVelocity;
     private bool isGrounded;
+    private bool groundedThisFrame;
 
     private void Awake()
     {
@@ -29,6 +33,12 @@ public class PlayerMovementBehaviour : MonoBehaviour
 
     private void Update()
     {
+        isGrounded = Physics2D.OverlapCircle(
+            groundCheck.position,
+            groundCheckRadius,
+            groundLayer
+        );
+
         newVelocity = rb.linearVelocity;
 
         if (moveAction != null) 
@@ -54,39 +64,6 @@ public class PlayerMovementBehaviour : MonoBehaviour
     public Vector2 GetMovementInput()
     {
         return axisValue;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Platform"))
-        {
-            isGrounded = true;
-        }
-
-        if (collision.gameObject.layer == LayerMask.NameToLayer("BorderWall"))
-        {
-            foreach (ContactPoint2D contact in collision.contacts)
-            {
-                if (contact.normal.y > 0.5f)
-                {
-                    isGrounded = true;
-                    break;
-                }
-            }
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Platform"))
-        {
-            isGrounded = false;
-        }
-
-        if (collision.gameObject.layer == LayerMask.NameToLayer("BorderWall"))
-        {
-            isGrounded = false;
-        }
     }
 
     public bool IsGrounded()
